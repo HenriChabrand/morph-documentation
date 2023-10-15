@@ -1,7 +1,7 @@
 {
-  "name": "nextra-docs-template",
+  "name": "morph-documentation",
   "version": "0.0.1",
-  "description": "Nextra docs template",
+  "description": "Morph",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,12 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/shuding/nextra-docs-template.git"
   },
-  "author": "Shu Ding <g@shud.in>",
-  "license": "MIT",
+  "author": "Henri Chabrand <henri.chabrand@gmail.com>",
   "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
+    "url": "https://github.com/HenriChabrand/morph-documentation/issues"
   },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://github.com/HenriChabrand/morph-documentation#readme",
   "dependencies": {
     "next": "^13.0.6",
     "nextra": "latest",
