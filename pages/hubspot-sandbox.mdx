@@ -1,0 +1,78 @@
+import { Tabs, Steps, Callout } from 'nextra/components';
+import { Screenshot } from '../components/screenshot';
+
+# HubSpot Setup
+
+This documentation provides a step-by-step guide on integrating the Morph Card Extension into your HubSpot app.
+
+![HubSpot Setup – Card Extension](/assets/docs/hubspot-setup--hero.png)
+
+Let's get started!
+
+## Process
+
+<Steps>
+
+### Create a HubSpot App 
+![HubSpot Setup – Create App](/assets/docs/hubspot-setup--create-app.png)
+
+Go to the [HubSpot Developers Portal](https://developers.hubspot.com/) and create a new app by following these steps:
+
+1. Click on 'Create an app' and fill in the required details, or open an existing app.
+2. In your app's `Auth`, enable the necessary scope for this integration – at a minimum – include `crm.objects.contacts.read` if you want the card to be displayed on contacts' page.
+
+<Callout type='info'>
+While the use of Morph does not require this particular authorisation flow, it's important to note that you won't receive any `card.requested` events until your client has installed your HubSpot application. This, in turn, necessitates them going through a full OAuth flow to grant your HubSpot app access to their data.
+</Callout>
+
+### Create a CRM Card 
+
+![HubSpot Setup – Create CRM Card](/assets/docs/hubspot-setup--create-crm-card.png)
+
+
+Add a new CRM Card to your app by following these steps:
+
+1. Navigate to `Features > CRM Cards`.
+2. Click on `Create CRM Card`.
+3. Give your card a relevant name. This should represent the object that is going to be displayed (e.g., "Contracts", "Projects").
+4. In the `Webhook URL` field, add your webhook receiver in this format:
+
+**`https://api.runmorph.dev/v0/request-hook?service_id=hubspot&hook_redirection=`** `YOUR_WEBHOOK_RECEIVER_URL`
+
+5. Toggle on the entities where you want your cards to be displayed. (at least one)
+6. Click `Create`.
+
+<Callout emoji='🤝'>
+Great! Your CRM Card is now set up and linked to Morph. 
+</Callout>
+
+### Test the Extension 
+
+Once you have completed the setup process, it is recommended that you test the integration. Here is how you can do it:
+
+1. Open a contact page in HubSpot.
+2. A payload similar to the one below should be sent to `YOUR_WEBHOOK_RECEIVER_URL`:
+
+```json
+{
+  "id": "req-833a-c30f-8765-7f440e1066",
+  "created_at": "2023-10-17T09:22:16.040Z",
+  "status": "card.requested",
+  "context": {
+    "service_id": "hubspot",
+    "workspace_id": "9950766",
+    "entity_type": "contact",
+    "entity_id": "123"
+  }
+}
+```
+
+3. Now, you can use the [Card Extension SDK](/card-extension) to build a card response to the card request. 
+
+<Callout emoji='🎉' >
+That's it! If you have already set up your webhook receiver to trigger a card build, you should now see your card in HubSpot.
+</Callout>
+
+</Steps>
+
+

@@ -4,5 +4,10 @@
     "type": "separator",
     "title": "API REFERENCE"
   },
-  "card-extension":"Card Extension"
+  "card-extension":"Card Extension",
+  "-- SANDBOX": {
+    "type": "separator",
+    "title": "SANDBOX"
+  },
+  "hubspot-sandbox":"HubSpot"
 }
