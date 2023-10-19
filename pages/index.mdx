@@ -1,0 +1,84 @@
+import { Tabs, Steps, Callout } from 'nextra/components';
+import { Screenshot } from '../components/screenshot';
+
+# Quick Start
+
+To quickly test the Morph extension builder, deploy this Vercel serverless function. It allows you to start creating cards for HubSpot, Salesforce, and Intercom.
+
+## Overview
+
+[This project](https://github.com/HenriChabrand/unified-extension-demo/tree/main) provides the architecture necessary for creating, handling and delivering CRM extension card requests across multiple platforms.
+
+The primary classes of this project is `CardBuilder`, allowing you to manages the card creation process. 
+It requires a `requestId` (extracted from the incoming request's body), and an `apiKey` (stored as an environment variable) upon initialization.
+
+When you've built your desired cards and content, the `CardBuilder.build()` method is used to automatically convert and deliver the card in the appropriate format for the targeted platform.
+
+Here are examples of the same card displayed on different platforms:
+
+<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-hubspot.png" alt="HubSpot Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-salesforce.png" alt="Salesforce Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-intercom.png" alt="Intercom Card"/>
+  </Tabs.Tab>
+</Tabs>
+
+
+
+## Getting Started
+
+Follow these steps to get the project up and running:
+
+<Steps>
+
+### Deploy on Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FHenriChabrand%2Funified-extension-demo&env=API_KEY&envDescription=Get%20in%20touche%20with%20henri.chabrand%40gmail.com%20to%20get%20your%20API%20Key.&envLink=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fhenri-chabrand--product-manager%2F&project-name=unified-extension-demo-company&repository-name=unified-extension-demo-company)
+
+<Callout>
+  Don't forget to set your API key in the environment variable.
+</Callout>
+   
+###  Test with Postman
+
+   GET `https://tlgbrx45cg.execute-api.eu-west-3.amazonaws.com/api/request-hook`
+   
+    **Query Parameters**
+
+
+   `hook_redirection` → The URL of your Vercel deployement e.g. `https://project-name.vercel.app/api/card-request-hook`
+
+   `service_id` → The ID of the simulated platform, which can be either `hubspot`, `salesforce`, or `intercom`.
+
+    You should receive a response that includes the generated cards in the appropriate payload format expected by the targeted platform.
+
+### Build your first Card
+
+Edit `api/card-request-hook.ts` and play with the `CardBuilder`:
+```typescript
+let builder = new CardBuilder(request_id, process.env.API_KEY);
+
+let card = builder.newCard('Partner NDA');
+
+let textContent = card.newText('Owner', 'Henri CHABRAND');
+
+let statusContent = card.newStatus('Status', 'Pending', 'WARNING');
+statusContent.setValue('Signed');
+statusContent.setColor('SUCCESS');
+
+let success = await builder.build(); // Wait for the build to complete to prevent the process from terminating prematurely
+```
+
+Explore the available [content types](/card-extension) that can be added to your card, along with instructions on defining [actions](/card-extension/action) user can take directly from their CRM.
+
+</Steps>
+
+## Integrate
+
+
+Details coming soon. 

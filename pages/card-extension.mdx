@@ -1,0 +1,56 @@
+import { Tabs } from 'nextra/components';
+import { Screenshot } from '../components/screenshot'
+
+# Card Extension
+
+The Card Extension in our Morph library utilizes a combined model and a service-specific mapping, allowing you to seamlessly build card extensions across multiple CRMs with a single integration logic. This API includes a suite of UI components that you can employ to craft your card extensions, much like using a design system. It boasts the following high-level components:
+
+-   `Card` - This is the core component to be displayed with an array of contents, like a detailed project card, for instance.
+-   `Text` - It exhibits key-value detail content within a card, such as showcasing task details.
+-   `Status` - It shows content status similar to an information in a card, like displaying the status of a task, for instance.
+
+Each card can deliver interaction functionality through an `Action`. Every action can be linked with an `ActionType`, thereby enabling your user to interact directly with your product via their CRM's card extensions.
+
+## Building
+
+To render a card within your customer's CRM using the Card extension, you need to:
+
+-   Listen to the `card.requested` webhook event from Morph (find more details [here](#))
+-   Instantiate `CardBuilder` using the `request.id` 
+-   Generate the content for the card(s) using the `CardBuilder` content function, such as `.addText` or `.addStatus` 
+-   Once the content is ready, build the card(s) using `CardBuilder.build()`
+
+Generally, you should strive to render something as quickly as possible (\<2s). This ensures a responsive feel to your extension.
+
+Here is an example showcasing a project type card:
+
+```tsx
+  const cardBuilder = morph.newCardBuilder(request_id);
+
+  // Get customer data from your backend
+
+  let card = cardBuilder.newCard('HubSpot Extension Project');
+
+  card.newStatus('Status', 'In Progress', 'WARNING');
+  card.newText('Project ID', 'HUB-015');
+  card.newText('Owner', 'Henri CHABRAND');
+
+  cardBuilder.build();
+```
+In this case, our `CardBuilder` is initiated from a `request_id`. After the data is retrieved from your backend, we create a `Card` with the content, such as the 'Status', 'Project ID', and 'Owner'.
+
+The card generated is displayed on the different service interfaces:
+
+
+
+<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-hubspot.png" alt="HubSpot Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-salesforce.png" alt="Salesforce Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-intercom.png" alt="Intercom Card"/>
+  </Tabs.Tab>
+</Tabs>

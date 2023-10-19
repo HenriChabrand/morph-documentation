@@ -1,0 +1,51 @@
+import { Screenshot } from '../../components/screenshot'
+import { Tabs } from 'nextra/components'
+
+# Status
+
+Status content provides a way to succinctly show a user the status of a certain operation or process. The `CardStatus` integrated into our API defines the following states: 'DEFAULT', 'INFO', 'SUCCESS', 'WARNING', and 'DANGER'.
+
+## API Reference
+
+### CardStatus
+
+A part of a card that can show status according to context-specific condition.
+
+Example:
+
+```tsx
+  const newCard = cardBuilder.newCard('Services');
+
+  newCard.newStatus('DB Service', 'Available', 'SUCCESS');
+  newCard.newStatus('API Service', 'Degraded Performance', 'WARNING');
+  newCard.newStatus('Logging Service', 'Unavailable', 'DANGER');
+```
+
+
+The card generated is displayed on the different service interfaces:
+
+
+<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-status-example-hubspot.png" alt="HubSpot Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-status-example-salesforce.png" alt="Salesforce Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-status-example-intercom.png" alt="Intercom Card"/>
+  </Tabs.Tab>
+</Tabs>
+
+
+
+## Props
+
+Prop  |   Description   |  Type  |  Default
+----- | --------------- | ------ | ---------
+name*  | The name of status field, displayed as the label.   |   string | -
+value* | The value of the status field to display next to the label. |   string  |   -
+type  | The visual style to apply depending on the status. |  'DEFAULT' \| 'INFO' \| 'SUCCESS' \| 'WARNING' \| 'DANGER'  | 'DEFAULT'
+
+`*` indicates required fields
+

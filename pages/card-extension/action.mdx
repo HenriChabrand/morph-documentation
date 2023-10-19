@@ -1,0 +1,45 @@
+import { Screenshot } from '../../components/screenshot'
+import { Tabs } from 'nextra/components'
+
+# Action
+
+Card Actions are interactive elements that you add to your cards to encourage users to take a certain action in your product, such as creation a task or changing a status. The API includes the `CardAction` class, which comes with integrated support for most service user interactions.
+
+## API Reference
+
+### Action
+
+The `Action` class allows you to add a clickable action in your card that can do the following actions: `request`, `open_url` or `open_url_in_iframe`.
+
+Example:
+
+```tsx
+  const newCard = cardBuilder.newCard('Card Title');
+
+  newCard.addAction('open_url_in_iframe', 'Open Website', 'https://www.example.com');
+```
+The above code will add a button labeled 'Click Me' in the card that opens the given URL when clicked with an iframe (for compatible service).
+
+The card generated is displayed on the different service interfaces:
+
+<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-action-example-hubspot.png" alt="HubSpot Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-action-example-salesforce.png" alt="Salesforce Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-action-example-intercom.png" alt="Intercom Card"/>
+  </Tabs.Tab>
+</Tabs>
+
+## Props
+
+Prop  |   Description   |  Type  |  Default
+----- | --------------- | ------ | ---------
+type*  | The type of the action. It can be `request`, `open_url` or `open_url_in_iframe`.   |   ActionType | -
+name* | The name of the action. It is represented as the button label. |   string  |   -
+url  | The target URL when the action type is `open_url` or `open_url_in_iframe`. |   string  |   ' '
+
+`*` indicates required fields

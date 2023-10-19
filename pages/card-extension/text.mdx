@@ -1,0 +1,48 @@
+import { Screenshot } from '../../components/screenshot'
+import { Tabs } from 'nextra/components'
+
+# Text
+
+Text content is used frequently in card development to display information to users. Our API provides the `CardText` class to help you create and format text content in your cards. The `CardText` method enables you to add informative text fields in your card components.
+
+## API Reference
+
+### CardText
+
+Component to add textual data in your card. 
+
+Example:
+
+```tsx
+  const newCard = cardBuilder.newCard('User Profile');
+
+  newCard.newText('Name', 'John Doe');
+  newCard.newText('Email', 'john.doe@example.com');
+  newCard.newText('Role', 'Product Manager');
+```
+
+The card generated is displayed on the different service interfaces:
+
+
+<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-text-example-hubspot.png" alt="HubSpot Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-text-example-salesforce.png" alt="Salesforce Card"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Screenshot src="/assets/docs/card-extension-text-example-intercom.png" alt="Intercom Card"/>
+  </Tabs.Tab>
+</Tabs>
+
+
+## Props
+
+Prop  |   Description   |  Type  |  Default
+----- | --------------- | ------ | ---------
+label*  | The label for the text field.   |   string | -
+value* | The text value to be displayed. |   string  |   -
+
+`*` indicates required fields
+
