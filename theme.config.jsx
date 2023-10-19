@@ -8,6 +8,18 @@ export default {
     return {
       titleTemplate: '%s – Morph'
     }
-  }
+  },
+  footer: {
+    text: (
+      <span>
+        Morph {new Date().getFullYear()} ©{' – build and owned by '}
+        <a href="https://www.linkedin.com/in/henri-chabrand--product-manager/" target="_blank">
+          Henri Chabrand
+        </a>
+        .
+      </span>
+    )
+  }  
   // ... other theme options
 }
+
