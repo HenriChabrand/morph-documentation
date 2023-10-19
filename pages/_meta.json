@@ -4,6 +4,7 @@
     "type": "separator",
     "title": "API REFERENCE"
   },
+  "sdk":"SDK",
   "card-extension":"Card Extension",
   "-- SANDBOX": {
     "type": "separator",
