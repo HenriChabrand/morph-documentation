@@ -10,5 +10,6 @@
     "type": "separator",
     "title": "SANDBOX"
   },
-  "hubspot-sandbox":"HubSpot"
+  "hubspot-sandbox":"HubSpot",
+  "salesforce-sandbox":"Salesforce"
 }

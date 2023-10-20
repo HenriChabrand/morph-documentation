@@ -1,0 +1,80 @@
+import { Tabs, Steps, Callout } from 'nextra/components';
+import { Screenshot } from '../components/screenshot';
+
+# Salesforce Setup
+
+This documentation guides you through the process of integrating the Morph Card Extension Sandbox into your Salesforce. 
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--hero.png)
+
+Let's dive in!
+
+## Process
+
+<Steps>
+
+### Install Package
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--install-package.png)
+
+Use the installation URL provided to install the package into your Salesforce Sandbox. If you don't have this URL, reach out to [Henri Chabrand](https://www.linkedin.com/in/henri-chabrand--product-manager/).
+
+<Callout type='warning'>
+As this is an unlisted Salesforce package, it can only be installed on Salesforce **Sandbox** or **Developer Edition**.
+</Callout>
+
+### Authorize Morph API
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--authorize-morph-api.png)
+
+Authorize your installed package to make calls to Morph's API `api.runmorph.dev`. 
+
+### Complete Installation
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--installing.png)
+
+Finally, click 'Install'. Wait for the process to complete.
+
+<Callout emoji='🎉' >
+The Morph Sandbox package is now installed! Now it's time to configure it to receive the `card_view.requested` webhook event on your webhook receiver.
+</Callout>
+
+</Steps>
+
+
+## Configuration 
+
+Once the package is installed:
+
+<Steps>
+
+### Set Hook Redirection URL 
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--set-hook-redirection.png)
+
+1. Navigate to `Setup` and search for `Custom Settings`.
+2. Locate `Morph Sandbox Hook Redirection` and click on `Manage`.
+3. Next to `Default Organization Level Value`, click on `New`.
+4. In the provided field, input `YOUR_WEBHOOK_RECEIVER_URL`, and click on 'Save'.
+
+### Add Component to Record's View
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--edit-page.png)
+
+1. Navigate to any contact's page.
+2. Click on the top right menu and select `Edit Page`.
+3. Search for the `Morph Sandbox...` component and drag-and-drop it to the top of the right side-bar in the contact's page.
+
+![Salesforce Sandbox - Install Package](/assets/docs/salesforce-setup--drop-component.png)
+
+4. Click on `Save`.
+5. If it's your first time editing the page layout, you'll be prompted to `Activate` the view. Please do so.
+6. Now, return to your contact page.
+
+<Callout emoji='🎉' >
+You should now be able to see the Morph Sandbox component and your first card (if you've built some)!
+</Callout>
+
+</Steps>
+
+That's it! Now you can experiment with creating and delivering CRM extension cards with the Morph on Salesforce.
