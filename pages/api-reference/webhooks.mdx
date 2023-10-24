@@ -1,0 +1,159 @@
+import { Screenshot } from '../../components/screenshot'
+import { Tabs, Callout } from 'nextra/components'
+
+# Webhooks Endpoint API Documentation
+
+## Method: GET 
+
+##### **Retrieve All Webhooks**
+
+Endpoint: `/webhooks`
+
+**Request Headers**:
+```
+x-api-key: cid-xxxxx-xxxxx-xxxx-xxxx
+x-api-secret: skt-xxxxx-xxxxx-xxxx-xxxx
+```
+
+**Expected Response**:
+
+*HTTP Status Code: 200*
+
+```json
+[
+  {
+    "service_id": "{service_id}",
+    "event": "{webhook_event}",
+    "url": "{webhook_url}",
+    "workspace_id": "{workspace_id}",
+    "webhook_id": "{webhook_id}",
+    "secret": "{webhook_secret}"
+  },
+  ...
+]
+```
+
+------
+
+##### **Retrieve Webhook By ID**
+
+Endpoint: `/webhooks/{webhook_id}`
+
+**Request Headers**:
+```
+x-api-key: cid-xxxxx-xxxxx-xxxx-xxxx
+x-api-secret: skt-xxxxx-xxxxx-xxxx-xxxx
+```
+
+**Expected Response**:
+
+*HTTP Status Code: 200*
+
+```json
+{
+  "id": "{webhook_id}",
+  "url": "{webhook_url}",
+  "event": "{webhook_event}",
+  "service_id": "{service_id}",
+  "workspace_id": "{workspace_id}",
+  "secret": "{webhook_secret}"
+}
+```
+
+*HTTP Status Code: 404*
+```json
+{
+  "message": "Webhook not found"
+}
+```
+
+
+## Method: POST 
+
+##### **Create a Webhook**
+
+Endpoint: `/webhooks`
+
+For creating a webhook, make a `POST` request to the `/webhooks` endpoint with the following request payload:
+
+**Payload Parameters**:
+
+Prop  |   Description   |  Type  
+----- | --------------- | ------ 
+url*  | The URL that the webhook should send requests to |   string 
+event* | The event that should trigger the webhook |   string (`card_view.requested`)
+service_id | The ID of the service associated with the webhook |   string (`hubspot`, `salesforce`,`intercom`)
+workspace_id | The ID of the workspace associated with the webhook | string 
+
+`*` indicates required fields
+
+**Request Headers**:
+```
+x-api-key: cid-xxxxx-xxxxx-xxxx-xxxx
+x-api-secret: skt-xxxxx-xxxxx-xxxx-xxxx
+```
+
+**Example Payload**:
+```json
+{
+  "url": "{webhook_url}",
+  "event": "{webhook_event}",
+  "service_id": "{service_id}",
+  "workspace_id": "{workspace_id}"
+}
+```
+
+**Expected Response**:
+
+*HTTP Status Code: 201* 
+
+```json
+{
+  "id": "{webhook_id}",
+  "url": "{webhook_url}",
+  "event": "{webhook_event}",
+  "service_id": "{service_id}",
+  "workspace_id": "{workspace_id}",
+  "secret": "{webhook_secret}"
+}
+```
+
+*HTTP Status Code: 400* 
+```json
+{
+  "message": "<error_msg>"
+}
+```
+
+## Method: DELETE
+
+##### **Delete a Webhook**
+
+Endpoint: `/webhooks/{webhook_id}`
+
+**Request Headers**:
+```
+x-api-key: cid-xxxxx-xxxxx-xxxx-xxxx
+x-api-secret: skt-xxxxx-xxxxx-xxxx-xxxx
+```
+
+**Expected Response**:
+
+*HTTP Status Code: 200*
+
+```json
+{
+  "message": "Webhook deleted successfully."
+}
+```
+
+*HTTP Status Code: 400*
+```json
+{
+  "message": "<error_msg>"
+}
+```
+
+<Callout type='info'>
+Make sure to replace placeholder values (e.g., `{webhook_url}`, `{webhook_event}`) with actual values where necessary.
+</Callout>

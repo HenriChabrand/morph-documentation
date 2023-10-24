@@ -6,6 +6,7 @@
   },
   "sdk":"SDK",
   "card-extension":"Card Extension",
+  "api-reference":"REST API",
   "-- SANDBOX": {
     "type": "separator",
     "title": "SANDBOX"
