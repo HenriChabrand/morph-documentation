@@ -1,4 +1,10 @@
 {
+  "login": {
+    "title": "Login",
+    "type": "page",
+    "href": "https://app.runmorph.dev/",
+    "newWindow": false
+  },
   "index": "Quick Start",
   "-- API REFERENCE": {
     "type": "separator",
