@@ -35,9 +35,11 @@ Add a new CRM Card to your app by following these steps:
 1. Navigate to `Features > CRM Cards`.
 2. Click on `Create CRM Card`.
 3. Give your card a relevant name. This should represent the object that is going to be displayed (e.g., "Contracts", "Projects").
-4. In the `Webhook URL` field, add your webhook receiver in this format:
+4. In the `Webhook URL` field, add your request hook receiver in this format:
 
-**`https://api.runmorph.dev/v0/request-hook?service_id=hubspot&hook_redirection=`** `YOUR_WEBHOOK_RECEIVER_URL`
+**`https://api.runmorph.dev/v0/request-hookr/:rhk-xxxx/hubspot/card_view`
+
+Your request hook receiver can be found in your [Morph Account](https://app.runmorph.dev/account) page.
 
 5. Toggle on the entities where you want your cards to be displayed. (at least one)
 6. Click `Create`.
