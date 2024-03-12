@@ -37,7 +37,7 @@ Add a new CRM Card to your app by following these steps:
 3. Give your card a relevant name. This should represent the object that is going to be displayed (e.g., "Contracts", "Projects").
 4. In the `Webhook URL` field, add your request hook receiver in this format:
 
-**`https://api.runmorph.dev/v0/request-hookr/:rhk-xxxx/hubspot/card_view`
+`https://api.runmorph.dev/v0/request-hooks/:rhk-xxxx/hubspot/card_view`
 
 Your request hook receiver can be found in your [Morph Account](https://app.runmorph.dev/account) page.
 
@@ -77,4 +77,36 @@ That's it! If you have already set up your webhook receiver to trigger a card bu
 
 </Steps>
 
+
+## Enable Action Request
+<Callout type='info'>
+The `action.requested` event lets you include quick actions for users in HubSpot without needing to access your product or open an iframe. 
+For instance, users can mark a task as completed by clicking a button. 
+
+You can set `action.type = REQUEST` at the card view's root level or on individual cards.
+Read more on the [Card Extension > Action](/card-extension/action) page.
+</Callout>
+<Steps>
+
+### Whitelist Morph Domain
+
+![HubSpot Setup – Create CRM Card](/assets/docs/hubspot-setup--create-crm-card-custom-action.png)
+
+
+To enable Custom Action to your CRM Card by following these steps:
+
+1. Navigate to `Features > CRM Cards`.
+2. Click on `{Your Card}`.
+3. Click on the `Custom actions` tab
+4. In the `Add a base URL` field, add:
+
+`https://api.runmorph.dev/v0/request-hooks/`
+
+Your request hook receiver can be found in your [Morph Account](https://app.runmorph.dev/account) page.
+
+
+<Callout emoji='🎉'>
+Great! Your CRM Card custom action is now whitelisted. 
+</Callout>
+</Steps>
 

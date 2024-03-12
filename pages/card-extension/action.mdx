@@ -1,5 +1,5 @@
 import { Screenshot } from '../../components/screenshot'
-import { Tabs } from 'nextra/components'
+import { Tabs, Callout } from 'nextra/components'
 
 # Action
 
@@ -11,7 +11,16 @@ Card Actions are interactive elements that you add to your cards to encourage us
 
 The `Action` class allows you to add a clickable action in your card that can do the following actions: `request`, `open_url` or `open_url_in_iframe`.
 
-Example:
+#### Open URL
+
+```tsx
+  const newCard = cardBuilder.newCard('Card Title');
+
+  newCard.addAction('open_url', 'Open Website', 'https://www.example.com');
+```
+The above code will add a button labeled 'Click Me' in the card that opens the given URL when clicked in a new browser tab.
+
+#### Open in iFrame
 
 ```tsx
   const newCard = cardBuilder.newCard('Card Title');
@@ -19,6 +28,46 @@ Example:
   newCard.addAction('open_url_in_iframe', 'Open Website', 'https://www.example.com');
 ```
 The above code will add a button labeled 'Click Me' in the card that opens the given URL when clicked with an iframe (for compatible service).
+
+You can decide from your webpage to close the iframe by posting this message:
+
+```html
+  <script type = "text/javascript">
+    function closeMorphIFrame() {
+      window.parent.postMessage(JSON.stringify({"action": "DONE"}), "*");
+    }
+  </script>
+```
+<Callout type='info'>
+The card view will automatically be refreshed once the iframe is closed – either via this post message or by the user in the targeted service interface.
+</Callout>
+
+#### Request Action
+
+```tsx
+  const newCard = cardBuilder.newCard('Card Title');
+
+  newCard.addAction('request', 'Click Me', null, 'your_action_id');
+```
+The above code will add a button labeled 'Click Me' in the card that will trigger a `action.requested` webhook event.
+You can check how to [process this event in the code exampmle](https://github.com/HenriChabrand/unified-extension-demo/blob/main/api/action-request-hook.ts)
+
+<Callout type='warning'>
+Don't forget to subscribe to the `action.requested` event either from the Morph dashboard interface or with the [webhooks subscription API](http://localhost:3001/api-reference/webhooks) to receive this event once a user clicks on the action button.
+</Callout>
+
+### Props
+
+Prop  |   Description   |  Type  |  Default
+----- | --------------- | ------ | ---------
+type*  | The type of the action. It can be `request`, `open_url` or `open_url_in_iframe`.   |   ActionType | -
+label* | The label of the action. It is represented as the button label. |   string  |   -
+url  | The target URL when the action type is `open_url` or `open_url_in_iframe`. |   string  |   ' '
+id  | An action `id` when the action type is `request` |   string  |   ' '
+
+`*` indicates required fields
+
+## Interface
 
 The card generated is displayed on the different service interfaces:
 
@@ -34,13 +83,3 @@ The card generated is displayed on the different service interfaces:
   </Tabs.Tab>
 </Tabs>
 
-## Props
-
-Prop  |   Description   |  Type  |  Default
------ | --------------- | ------ | ---------
-type*  | The type of the action. It can be `request`, `open_url` or `open_url_in_iframe`.   |   ActionType | -
-label* | The label of the action. It is represented as the button label. |   string  |   -
-url  | The target URL when the action type is `open_url` or `open_url_in_iframe`. |   string  |   ' '
-id  | An action `id` when the action type is `request` |   string  |   ' '
-
-`*` indicates required fields
