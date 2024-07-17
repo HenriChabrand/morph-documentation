@@ -1,5 +1,5 @@
-import { Screenshot } from '../../components/screenshot'
-import { Tabs, Callout } from 'nextra/components'
+import { Screenshot } from "../../components/screenshot";
+import { Tabs, Callout } from "nextra/components";
 
 # Response Endpoint
 
@@ -9,9 +9,10 @@ import { Tabs, Callout } from 'nextra/components'
 
 Endpoint: `/requests/{request_id}/response`
 
-This POST method creates a card view response to the corresponding request. 
+This POST method creates a card view response to the corresponding request.
 
 **Request Headers**:
+
 ```
 x-api-key: {apiKey}
 x-api-secret: {apiSecret}
@@ -19,11 +20,11 @@ x-api-secret: {apiSecret}
 
 The request payload parameters:
 
-Prop  |   Description   |  Type  |  Required
------ | --------------- | ------ | ---------
-type*  | The type of response. A card response would use `card_view`.   |   string | Yes
-completed* | A boolean indicating whether the card view was generated successfully.  |   boolean | Yes
-card_view*  | The object containing the root level actions and cards for the card view.  |   object | Yes
+| Prop        | Description                                                               | Type    | Required |
+| ----------- | ------------------------------------------------------------------------- | ------- | -------- |
+| type\*      | The type of response. A card response would use `card_view`.              | string  | Yes      |
+| completed\* | A boolean indicating whether the card view was generated successfully.    | boolean | Yes      |
+| card_view\* | The object containing the root level actions and cards for the card view. | object  | Yes      |
 
 `*` indicates required fields
 
@@ -31,99 +32,107 @@ card_view*  | The object containing the root level actions and cards for the car
 
 Inside the `card_view` object:
 
-Prop  |   Description   |  Type  |  Required
------ | --------------- | ------ | ---------
-root  | An object containing root level actions payload parameters. | object | Yes
-cards | An array of Card Objects, each of which defines a card and contains the payload parameters. | array | Yes
+| Prop  | Description                                                                                 | Type   | Required |
+| ----- | ------------------------------------------------------------------------------------------- | ------ | -------- |
+| root  | An object containing root level actions payload parameters.                                 | object | Yes      |
+| cards | An array of Card Objects, each of which defines a card and contains the payload parameters. | array  | Yes      |
 
 ##### **Root Level Action Object**
 
 Each root level action object contains:
 
-Prop  |   Description   |  Type  |  Required
------ | --------------- | ------ | ---------
-type*  | The type of action. It can be `REQUEST`, `OPEN_URL`, or `OPEN_URL_IN_IFRAME`.   |   string | Yes
-name* | The name of the action, represented as the button label. |   string | Yes
-url  | The target URL when the action type is `OPEN_URL` or `OPEN_URL_IN_IFRAME`. |   string | No (Required for `OPEN_URL`, `OPEN_URL_IN_IFRAME`)
+| Prop   | Description                                                                   | Type   | Required                                           |
+| ------ | ----------------------------------------------------------------------------- | ------ | -------------------------------------------------- |
+| type\* | The type of action. It can be `REQUEST`, `OPEN_URL`, or `OPEN_URL_IN_IFRAME`. | string | Yes                                                |
+| name\* | The name of the action, represented as the button label.                      | string | Yes                                                |
+| url    | The target URL when the action type is `OPEN_URL` or `OPEN_URL_IN_IFRAME`.    | string | No (Required for `OPEN_URL`, `OPEN_URL_IN_IFRAME`) |
 
 ##### **Card Object**
 
 Each Card Object contains:
 
-Prop  |   Description   |  Type  |  Required
------ | --------------- | ------ | ---------
-title* | The title of the card. |   string | Yes
-link  | A link associated with the card. |   string | No 
-contents* | An array of Content Objects, each defines a piece of content in the card view. |   array | Yes
-actions | An array of Action Objects, each defines an action in the card. |  array | No
+| Prop       | Description                                                                    | Type   | Required |
+| ---------- | ------------------------------------------------------------------------------ | ------ | -------- |
+| title\*    | The title of the card.                                                         | string | Yes      |
+| link       | A link associated with the card.                                               | string | No       |
+| contents\* | An array of Content Objects, each defines a piece of content in the card view. | array  | Yes      |
+| actions    | An array of Action Objects, each defines an action in the card.                | array  | No       |
 
 ##### **Content Object**
 
 Each Content Object contains:
 
-Prop  |   Description   |  Type  |  Required
------ | --------------- | ------ | ---------
-type* | The type of content. It can be `text` or `status`. |   string | Yes
-label* | The label for the content. |   string | Yes
-value* | The value for the content. |   string | Yes
-color  | The color for the status. It can be `SUCCESS`, `WARNING`, `DANGER`, `INFO` or `DEFAULT`. |   string | No (Required for `status` type)
+| Prop    | Description                                                                              | Type   | Required                        |
+| ------- | ---------------------------------------------------------------------------------------- | ------ | ------------------------------- |
+| type\*  | The type of content. It can be `text` or `status`.                                       | string | Yes                             |
+| label\* | The label for the content.                                                               | string | Yes                             |
+| value\* | The value for the content.                                                               | string | Yes                             |
+| link    | A link associated with the content.                                                      | string | No                              |
+| color   | The color for the status. It can be `SUCCESS`, `WARNING`, `DANGER`, `INFO` or `DEFAULT`. | string | No (Required for `status` type) |
 
 Each Action Object within a Content Object contains the same properties as root level actions.
 
 **Example Payload**:
+
 ```json
 {
-    "type": "card_view",
-    "completed": true,
-    "card_view": {
-        "cards": [
-            {
-                "title": "Partner NDA V1.0.5",
-                "contents": [
-                    {
-                        "type": "text",
-                        "label": "Owner",
-                        "value": "Henri CHABRAND"
-                    },
-                    {
-                        "type": "status",
-                        "label": "Status",
-                        "value": "Signed",
-                        "color": "SUCCESS"
-                    }
-                ],
-                "actions": [
-                    {
-                        "type": "OPEN_URL_IN_IFRAME",
-                        "label": "Open Website from Header",
-                        "url": "https://henri.pm/"
-                    }
-                ]
-            },
-            {
-                "title": "0 to 100 Contract Agreement",
-                "contents": [
-                    {
-                        "type": "text",
-                        "label": "Owner",
-                        "value": "Henri CHABRAND"
-                    },
-                    {
-                        "type": "status",
-                        "label": "Status",
-                        "value": "Pending",
-                        "color": "WARNING"
-                    }
-                ]
-            }
+  "type": "card_view",
+  "completed": true,
+  "card_view": {
+    "cards": [
+      {
+        "title": "Partner NDA V1.0.5",
+        "contents": [
+          {
+            "type": "text",
+            "label": "Owner",
+            "value": "Henri CHABRAND"
+          },
+          {
+            "type": "status",
+            "label": "Status",
+            "value": "Signed",
+            "color": "SUCCESS"
+          },
+          {
+            "type": "text",
+            "label": "LinkedIn",
+            "value": "@HenriChabrand",
+            "link": "https://www.linkedin.com/in/henri-chabrand--product-manager/"
+          }
+        ],
+        "actions": [
+          {
+            "type": "OPEN_URL_IN_IFRAME",
+            "label": "Open Website from Header",
+            "url": "https://henri.pm/"
+          }
         ]
-    }
+      },
+      {
+        "title": "0 to 100 Contract Agreement",
+        "contents": [
+          {
+            "type": "text",
+            "label": "Owner",
+            "value": "Henri CHABRAND"
+          },
+          {
+            "type": "status",
+            "label": "Status",
+            "value": "Pending",
+            "color": "WARNING"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
 **Expected Response**:
 
-*HTTP Status Code: 201* 
+_HTTP Status Code: 201_
 
 ```json
 {
@@ -133,13 +142,16 @@ Each Action Object within a Content Object contains the same properties as root 
 }
 ```
 
-*HTTP Status Code: 400* 
+_HTTP Status Code: 400_
+
 ```json
 {
   "message": "<error_msg>"
 }
 ```
 
-<Callout type='info'>
-Make sure to replace placeholder values (e.g., `{ACTION_TYPE}`, `{ACTION_NAME}`) with actual values where necessary. The type of the content and color for the status should be chosen from the prescribed set of values.
+<Callout type="info">
+  Make sure to replace placeholder values (e.g., `{ACTION_TYPE}`, `{ACTION_NAME}
+  `) with actual values where necessary. The type of the content and color for the
+  status should be chosen from the prescribed set of values.
 </Callout>

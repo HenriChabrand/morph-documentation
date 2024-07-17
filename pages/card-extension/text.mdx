@@ -1,5 +1,5 @@
-import { Screenshot } from '../../components/screenshot'
-import { Tabs } from 'nextra/components'
+import { Screenshot } from "../../components/screenshot";
+import { Tabs } from "nextra/components";
 
 # Text
 
@@ -9,40 +9,47 @@ Text content is used frequently in card development to display information to us
 
 ### CardText
 
-Component to add textual data in your card. 
+Component to add textual data in your card with optional link.
 
 Example:
 
 ```tsx
-  const newCard = cardBuilder.newCard('User Profile');
+const newCard = cardBuilder.newCard("User Profile");
 
-  newCard.newText('Name', 'John Doe');
-  newCard.newText('Email', 'john.doe@example.com');
-  newCard.newText('Role', 'Product Manager');
+newCard.newText("Name", "John Doe");
+newCard.newText("Handle", "@john", "https://abc.com/john");
+newCard.newText("Role", "Product Manager");
 ```
 
 The card generated is displayed on the different service interfaces:
 
-
-<Tabs items={['HubSpot', 'Salesforce', 'Intercom']}>
+<Tabs items={["HubSpot", "Salesforce", "Intercom"]}>
   <Tabs.Tab>
-    <Screenshot src="/assets/docs/card-extension-text-example-hubspot.png" alt="HubSpot Card"/>
+    <Screenshot
+      src="/assets/docs/card-extension-text-example-hubspot.png"
+      alt="HubSpot Card"
+    />
   </Tabs.Tab>
   <Tabs.Tab>
-    <Screenshot src="/assets/docs/card-extension-text-example-salesforce.png" alt="Salesforce Card"/>
+    <Screenshot
+      src="/assets/docs/card-extension-text-example-salesforce.png"
+      alt="Salesforce Card"
+    />
   </Tabs.Tab>
   <Tabs.Tab>
-    <Screenshot src="/assets/docs/card-extension-text-example-intercom.png" alt="Intercom Card"/>
+    <Screenshot
+      src="/assets/docs/card-extension-text-example-intercom.png"
+      alt="Intercom Card"
+    />
   </Tabs.Tab>
 </Tabs>
 
-
 ## Props
 
-Prop  |   Description   |  Type  |  Default
------ | --------------- | ------ | ---------
-label*  | The label for the text field.   |   string | -
-value* | The text value to be displayed. |   string  |   -
+| Prop    | Description                     | Type   | Default |
+| ------- | ------------------------------- | ------ | ------- |
+| label\* | The label for the text field.   | string | -       |
+| value\* | The text value to be displayed. | string | -       |
+| link    | Optional URL to link the text.  | string | -       |
 
 `*` indicates required fields
-
